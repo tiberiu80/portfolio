@@ -1,0 +1,182 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+
+<head>
+	<title>Active nav</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css"/>
+	<link rel="stylesheet" type="text/css" href="css/reset.css">
+	
+	<script src="jquery/jquery.validate.js"></script>
+	<script src="jquery/jquery.validate.min.js"></script>
+	<!--Copy and paste the code below, into your <head> section </head>-->
+ 
+<link rel="stylesheet" type="text/css" href="pirobox_extended/css_pirobox/style_1/style.css"/>
+<!--::: OR :::-->
+<link rel="stylesheet" type="text/css" href="pirobox_extended/css_pirobox/style_2/style.css"/>
+<!--::: it depends on which style you choose :::-->
+ 
+<script type="text/javascript" src="pirobox_extended/js/jquery.min.js"></script>
+<script type="text/javascript" src="pirobox_extended/js/jquery-ui-1.8.2.custom.min.js"></script>
+<script type="text/javascript" src="pirobox_extended/js/pirobox_extended.js"></script>
+
+</head>
+<body>
+	<!-- Site wrapper start -->
+	<div id="site_wrapper">
+		<!-- Header start -->
+		<div id="header">
+			<h1>Tiberiu Mitiloaga</h1>
+			<span>Developer</span>
+		</div>
+		<!-- Header end-->
+		<!-- Menu start -->
+		<div id="listwrapper">
+		<ul class="lista">
+		
+			<li name="about" class="tabsuri active">About</li>
+			<li name="resume" class="tabsuri">Resume</li>
+			<li name="port" class="tabsuri">Portfolio</li>
+			
+			<li name="contact" class="tabsuri">Contact</li>
+		</ul>
+	</div>
+	<!-- Menu end -->
+	<!-- Middle start -->
+		<div id="middle">
+			<!-- About start -->
+			<div id="about" class="container content" style="display:block;">
+			
+				<img id="poza" src="images/tibi_av.jpg" alt="Tiberiu Mitiloaga" />
+				<div id="info">
+				<ul>
+					<li>Name: Mitiloaga Tiberiu</li>
+					<li>Date of birth: 29-04-1980</li>
+					<li>Phone: +40766 299 607</li>
+					<li>Skype: mitiloaga.tiberiu</li>
+					<li>Email: tmitiloaga80@yahoo.com</li>
+					<li style="margin-bottom:0;">Website: wwww.tiberiumitiloaga.eu</li>
+				</ul>
+				
+				</div>
+				<p>
+				Hi there, my name is Tiberiu and i code in Html/Css/JQuery for front end.
+				<br/>
+				I have one year of experiance. Thank you for visiting my website!
+				</p>
+			</div>
+			<!-- About end -->
+			<!-- Resume start -->
+			<div id="resume" class="container content" style="display:none;">
+				<p>
+				Hi there, my name is Tiberiu and i love to develop for front end.
+				<br/>
+				I have 1 year of experiance. Thank you for visiting my website!
+				</p>
+			</div>
+			<!-- Resume end -->
+			<!-- Portfolio start -->
+			<div id="port" class="container content" style="display:none;">
+				<div id="port_item">
+					<a class="pirobox" rel="single" href="images/wjtlfvyesql.jpg" title="An online game with over 10000 players from all over the world where i developed in frontend and backend for almost 3 months."><img src="images/virtport.jpg" alt="" />
+					</a>
+					<h2>Virtconomics</h2>
+					<span>Html/Css/Jquery/Php/MySql...</span>
+					<a class="portlink" href="http://www.virtconomics.com" title="An online game with over 10000 players from all over the world where i developed in frontend and backend for almost 3 months." target="_blank">www.virtconomics.com</a>
+				</div>
+			</div>
+			<!-- Portfolio end -->
+			<!-- Contact start -->
+				<div id="contact" class="container content" style="display:none;">
+					<div id="response" style="display:none;"></div>
+					<div style="clear:both;"></div>
+				 <form id="contact_form" action="process.php" method="post">
+
+				 	<label for="name" size="30">Name</label>
+				 	<input type="text" id="contactname" name="contactname"  class="input required"/>
+
+				 	<label for="email">Email</label>
+				 	<input type="text" id="email" name="email"  class="input required email"/>
+
+				 	<label for="message">Message</label>
+				 	<textarea id="message" name="message" cols="40" rows="10" class="required"></textarea>
+
+				 	<input type="submit" value="Send Message"  class="submitbutton" />
+				 </form>
+					
+
+					<div id="map">
+						<iframe src="map.html" width="530" height="400"></iframe>
+					</div>
+					
+			</div>
+		   <!-- Contact end -->
+		</div>
+		<!-- Middle end -->
+	 		<div id="footer">
+				<p id="foot">Copyright 2013 Tiberiu Mitiloaga</p>
+	        </div>
+    </div>
+    		
+
+
+ <!-- Site wrapper end --> 
+   
+<script>
+$(document).ready(function(){
+$(".lista li").click(function(){
+ $(".lista li").removeClass('active');
+ $(this).addClass('active');
+});
+ // When a link is clicked  
+    $("li.tabsuri").click(function () {  
+  
+  
+  
+        // slide all elements with the class 'content' up  
+        $(".content").slideUp('slow');  
+  
+        // Now figure out what the 'name' attribute value is and find the element with that id.  Then slide that down.  
+        var content_show = $(this).attr("name");  
+        $("#"+content_show).slideDown('slow');  
+
+  
+    });  
+   $().piroBox_ext({
+        piro_speed : 900,
+        bg_alpha : 0.8,
+        piro_scroll : true //pirobox always positioned at the center of the page
+    });
+
+$('#contact_form').submit(function(e){
+		e.preventDefault();
+		var form = $(this);
+		var post_url = form.attr('action');
+		var post_data = form.serialize();
+
+		$.ajax({
+			type: 'POST',
+			url: post_url, 
+			data: post_data,
+			success: function(msg) {
+				
+					$('#response').html(msg).slideDown('slow');
+					$('#response').click(function(){
+						$(this).slideUp("slow",function(){
+						location.reload();
+						});
+						});
+				
+			}
+		});
+
+			
+
+	});
+
+});
+
+</script>
+
+</body>
+</html>
